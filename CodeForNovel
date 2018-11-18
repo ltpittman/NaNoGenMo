@@ -1,0 +1,30 @@
+#imports
+
+import random
+import markovify
+import dominate
+from dominate.tags import *
+
+#Code for the text:
+
+novel = ' '
+
+with open('JANovel.txt','r') as file:
+    text = file.read()
+
+text_model = markovify.Text(text)
+
+for i in range(2500):
+    novel += str(text_model.make_sentence()) + " "
+    r = random.randint(0,100)
+    if (r<150):
+        novel += "\n\n"
+        
+        
+#Code for txt.file:
+
+text_file = open("MyNovel.txt", "w")
+text_file.write('"Pride, Sensibility, and Emma..."\n\n')
+text_file.write(novel)
+text_file.write("The End.")
+text_file.close()
